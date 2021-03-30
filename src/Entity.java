@@ -1,3 +1,6 @@
+/**
+ * Class Entity that is shared between Heroes and Enemies
+ */
 public abstract class Entity {
     
     //An entity basic components

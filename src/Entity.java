@@ -15,11 +15,13 @@ public abstract class Entity {
     abstract String attack(Entity e);
 
     //Get entity's name
-    String getName(){return name;}
+    public String getName(){return name;}
     
     //Get entity's current health points
-    int getHP(){return hp;}
+    public int getHP(){return hp;}
 
     //Get entity's meximum health points
-    int getMaxHP(){return maxHP;}
+    public int getMaxHP(){return maxHP;}
+
+
 }

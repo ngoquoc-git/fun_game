@@ -82,4 +82,11 @@ public class Map {
     public void revealed(Point p){
         revealed[p.x][p.y] = true;
     }
+
+    /**
+     * Replace location p as '#'
+     */
+    public void removeCharAtLoc(Point p){
+        map[p.x][p.y] = '#';
+    }
 }

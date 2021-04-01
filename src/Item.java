@@ -1,3 +1,5 @@
+package fun_game.src;
+
 public class Item {
     private String name;
 

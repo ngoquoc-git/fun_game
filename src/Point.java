@@ -1,3 +1,5 @@
+package fun_game.src;
+
 public class Point {
     //Location x,y of an object in a 2D array
     public int x;

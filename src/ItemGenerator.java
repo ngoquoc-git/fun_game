@@ -1,3 +1,5 @@
+package fun_game.src;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

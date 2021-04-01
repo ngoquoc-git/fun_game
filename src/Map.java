@@ -1,3 +1,5 @@
+package fun_game.src;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -33,6 +35,7 @@ public class Map {
                     }
                 }
             }
+            sc.close();
         }
         catch (FileNotFoundException e){
             System.out.println("File not found");

@@ -137,4 +137,31 @@ public class Hero extends Entity implements Magical{
             }
         }
     }
+
+    /**
+     * Check if any potions exist in the inventory
+     * @return true if any, false otherwise
+     */
+    public boolean hasPotion(){
+        for (int i = 0; i < items.size(); i++){
+            if (items.get(i).getName().equals("Health Point")) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Use potion to heal
+     */
+    public void drinkPotion(){
+        int i = 0;
+        while(items.get(i).getName().equals("Health Potion") && i < items.size()){
+            i++;
+        }
+        if(i < items.size()) {
+            heal(8);
+            dropItem(i);
+            toString();
+        }
+        else System.out.print("You don't have any Health Potion.\n");
+    }
 }

@@ -74,4 +74,12 @@ public class Map {
         }
         return p;
     }
+
+    /**
+     * Set chracter at given location revealable
+     * @param p location to be revealed
+     */
+    public void revealed(Point p){
+        revealed[p.x][p.y] = true;
+    }
 }

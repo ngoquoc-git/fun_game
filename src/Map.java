@@ -46,4 +46,14 @@ public class Map {
      * @return character at a given point
      */
     public char getCharAtLoc(Point p) {return map[p.x][p.y];}
+
+    public void displayMap(Point p){
+        for(int i = 0; i < map.length; i++){
+            for (int j = 0; j < map.length; j++){
+                if(p.x == i && p.y == j) System.out.print('*' + " ");
+                else if (revealed[i][j]) System.out.print(map[i][j] + " ");
+                else    System.out.print("X ");
+            }
+        }
+    }
 }

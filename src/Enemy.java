@@ -7,6 +7,7 @@ public class Enemy extends Entity{
      */
     private Item item;
     static final int CRITICAL = 3;
+    static final int MAX_ATTACK = 8;
 
     /**
      * Create construction Enemy with name n, max health mHP, and item i
@@ -39,9 +40,11 @@ public class Enemy extends Entity{
         int chance = 0;
         Random random = new Random();
 
-        int attack = random.nextInt(8);
+        //Enemy will have a random damage range from 1 to 8
+        int attack = random.nextInt(MAX_ATTACK) + 1;
 
         //There is 20% the enemy have a critical attack
+        //Critical attack will be attack multiply by CRITICAL(3)
         if(chance >= 0 && chance < 20)
         {
             attack *= CRITICAL;  

@@ -56,4 +56,22 @@ public class Map {
             }
         }
     }
+
+    /**
+     * find character 's' in the map
+     * @return location of 's'
+     */
+    public Point findStart(){
+        Point p = new Point(0,0);
+        for(int i = 0; i < map.length; i++){
+            for (int j = 0; j < map.length; j++){
+                if(map[i][j] == 's'){
+                    p.x = i;
+                    p.y = j;
+                    return p; 
+                }
+            }
+        }
+        return p;
+    }
 }

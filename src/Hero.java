@@ -1,6 +1,10 @@
 import java.util.Random;
 import java.util.ArrayList;
 public class Hero extends Entity implements Magical{
+
+    private ArrayList<Item> items = new ArrayList<>();
+    private Map map;
+    private Point location;
     
     /**
      * Magical Misslle skill
@@ -61,4 +65,6 @@ public class Hero extends Entity implements Magical{
         else if (damage == 1) return getName() + " scracthes " + e.getName() + " that deals 1 damage.\n"; 
         else return getName() + " chops " + e.getName() + " vertically with his sword that deals " + damage + " damages";
     }
+
+    
 }

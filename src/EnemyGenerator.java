@@ -10,8 +10,6 @@ public class EnemyGenerator {
     static final int EXTRA_HP = 10;
     static final int EXTRA_DAMAGE = 3;
 
-
-
     /**
      * Constructor read input file and load into ArrayList enemyList
      * @param ig generate item

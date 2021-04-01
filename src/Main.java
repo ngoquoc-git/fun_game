@@ -88,72 +88,100 @@ public class Main {
     }
 
     public static boolean fight(Hero h, Enemy e){
-        boolean battle = true;
-        int decision, attacks, magic;
-        Random rand = new Random();
-
+        int decision;
+        int attack;
+        
+        //Create a magical enemy if condition is satisfied
         if (e instanceof Magical) e = (MagicalEnemy) e;
         System.out.println(e.toString());
+        
+        //check if hero has potions to use
+        if(h.hasPotion()){
+            System.out.println("1. Fight.\n2. Run Away.\n3. Drink Health Potion.\n");
+            decision = CheckInput.getIntRange(1, 3);
+        }
+        else{
+            System.out.println("1. Fight.\n2. Run Away.\n");
+            decision = CheckInput.getIntRange(1, 2);
+        }
 
-        do{
-            if(h.hasPotion() && h.getHP() < e.getMaxHP()){
-                System.out.println("1. Fight.\n2. Run Away.\n3. Drink Potion.\n");
-                decision = CheckInput.getIntRange(1, 3);
+        //Fight
+        if (decision == 1){
+            System.out.println("1.Physical Attack\n2.Magical Attack");
+            attack = CheckInput.getIntRange(1, 2);
+
+            if (attack == 1){
+                System.out.println(h.attack(e));
+                if (e.getHP() > 0){
+                    System.out.println(e.attack(h));
+                }
             }
+
             else{
-                System.out.println("1. Fight.\n2. Run Away.");
-                decision = CheckInput.getIntRange(1, 2);
-            }
-            //Fight
-            if (decision == 1){
-                System.out.println("1. Physical Attack.\n2. Magical Attack.");
-                attacks = CheckInput.getIntRange(1, 2);
-                //Physical attack
-                if (attacks == 1) System.out.print(h.attack(e));
-                //Magical attack
-                else{
-                    System.out.println(Magical.MAGIC_MENU);
-                    magic = CheckInput.getIntRange(1, 3);
-                    switch (magic){
-                        case 1:  System.out.print(h.magicalMisslle(e)); break;
-                        case 2:  System.out.print(h.fireBall(e)); break;
-                        case 3:  System.out.print(h.thunderClap(e)); break;
+                System.out.println(Magical.MAGIC_MENU);
+                int magicalAttack = CheckInput.getIntRange(1, 3);
+                if(magicalAttack == 1){
+                    System.out.println(h.magicalMissile(e));
+                    if (e.getHP() > 0){
+                        System.out.println(e.attack(h));
                     }
                 }
-                //Stop if enemy die
-                if (e.getHP() == 0) {
-                    System.out.print(e.getName() + " has been killed.");
-                    return true;
+                else if (magicalAttack == 2){
+                    System.out.println(h.fireBall(e));
+                    if (e.getHP() > 0){
+                        System.out.println(e.attack(h));
+                    }
                 }
                 else {
-                    if (e instanceof Magical){
-                        attacks = rand.nextInt(4);
-                        switch(attacks){
-                            case 0:  System.out.print(e.magicalMisslle(h)); break;
-                            case 1:  System.out.print(e.fireBall(h)); break;
-                            case 2:  System.out.print(e.thunderClap(h)); break;
-                            case 3:  System.out.print(e.attack(h)); break;
-                        }
+                    System.out.println(h.thunderClap(e));
+                    if (e.getHP() > 0){
+                        System.out.println(e.attack(h));
                     }
-                    else System.out.print(e.attack(h));
-                    
-                    if(h.getHP() == 0) return false;
                 }
             }
-            //Run Away
-            else if (decision == 2) {
-                int fleePercent = rand.nextInt(100);
-                //Successfully run away
-                if (fleePercent > 20) return false;
-                //Unsuccessfully run away and lose 1 turn
-                else{
-                    System.out.println("You could not get away this time.");
-                    System.out.print(e.attack(h));
-                    if (h.getHP() == 0) return false;
-                }     
+            //end fight if enemy is death and let hero pick up item if possible
+            if (e.getHP() < 1) {
+                System.out.println("You defeated the " + e.getName());
+                h.pickUpItem(e.getItem());
+                return false;
             }
-            //Drink Potion
-            else h.drinkPotion();
-        } while (battle);
+            return true;
+        }
+        //Run Away
+        else if(decision == 2){
+            Random rand = new Random();
+            int getAway = rand.nextInt(2);
+            int run;
+            //Run successfully
+            if(getAway == 1){
+                System.out.println(h.getName() + " successfully got away.");
+                if(h.getLocation().x == 0 && h.getLocation().y == 0) h.goEast();
+                else if(h.getLocation().x == 0 && h.getLocation().y == 4) h.goSouth();
+                else if(h.getLocation().x == 4 && h.getLocation().y == 0) h.goNorth();
+                else if(h.getLocation().x == 4 && h.getLocation().y == 4) h.goWest();
+                else { 
+                    run = rand.nextInt(3);
+                    switch(run){
+                        case 0: h.goSouth(); break;
+                        case 1: h.goNorth(); break;
+                        case 2: h.goEast(); break;
+                        case 3: h.goWest(); break;
+                    }   
+                }
+                return false;
+            }
+            //hero got hity if run failed
+            else{
+                System.out.println(e.getName() + " did not let you get away.");
+                System.out.println(e.attack(h));
+                System.out.println(h.toString());
+                if(h.getHP() > 0) return true;
+                else return false;
+            }
+        }
+        else {
+            h.drinkPotion();
+            return true;
+        }   
     }
 }

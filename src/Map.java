@@ -40,5 +40,10 @@ public class Map {
         }
     }
 
-
+    /**
+     * Get char at point p
+     * @param p location of character
+     * @return character at a given point
+     */
+    public char getCharAtLoc(Point p) {return map[p.x][p.y];}
 }

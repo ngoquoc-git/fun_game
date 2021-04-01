@@ -18,7 +18,7 @@ public class ItemGenerator {
 
         try{
             //Return to the current working directory
-            String currentDir = System.getProperty("user.dir");
+            String currentDir = System.getProperty("ItemList.txt");
 
             //Using scanner to open the file
             Scanner scan = new Scanner(new File(currentDir));

@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.ArrayList;
 public class Hero extends Entity implements Magical{
 
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Item> items;
     private Map map;
     private Point location;
     
@@ -66,5 +66,16 @@ public class Hero extends Entity implements Magical{
         else return getName() + " chops " + e.getName() + " vertically with his sword that deals " + damage + " damages";
     }
 
-    
+    /**
+     * Create a hero with 25 HP and given name
+     * Find the start point of that hero
+     * @param n name of hero
+     * @param m map level
+     */
+    public Hero(String n, Map m){
+        super(n, 25);
+        items = new ArrayList<>();
+        map = m;
+        location = map.findStart();
+    }
 }

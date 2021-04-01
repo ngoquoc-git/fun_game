@@ -1,4 +1,4 @@
-package fun_game.src;
+
 
 //Project: turn-based game of Quoc Ngo and Nam Nguyen
 class Main{

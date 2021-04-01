@@ -1,4 +1,4 @@
-package fun_game.src;
+
 
 /**
  * Class Entity that is shared between Heroes and Enemies

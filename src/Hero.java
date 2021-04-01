@@ -164,4 +164,68 @@ public class Hero extends Entity implements Magical{
         }
         else System.out.print("You don't have any Health Potion.\n");
     }
+
+    /**
+     * Retrieve hero's current location
+     * @return location
+     */
+    public Point getLocation(){
+        return location;
+    }
+
+    /**
+     * Indicate hero to go north if it does not hit the boundary
+     * reveal its previous footstep
+     * @return hero's location
+     */
+    public char goNorth(){
+        if (location.x == 0){
+            return map.getCharAtLoc(location);
+        }
+        map.revealed(location);
+        location.x--;
+        return map.getCharAtLoc(location);
+    }
+
+    /**
+     * Indicate hero to go south if it does not hit the boundary
+     * reveal its previous footstep
+     * @return hero's location
+     */
+    public char goSouth(){
+        if (location.x == 4){
+            return map.getCharAtLoc(location);
+        }
+        map.revealed(location);
+        location.x++;
+        return map.getCharAtLoc(location);
+    }
+
+    /**
+     * Indicate hero to go east if it does not hit the boundary
+     * reveal its previous footstep
+     * @return hero's location
+     */
+    public char goEast(){
+        if (location.y == 4){
+            return map.getCharAtLoc(location);
+        }
+        map.revealed(location);
+        location.y++;
+        return map.getCharAtLoc(location);
+    }
+
+    /**
+     * Indicate hero to go west if it does not hit the boundary
+     * reveal its previous footstep
+     * @return hero's location
+     */
+    public char goWest(){
+        if (location.y == 0){
+            return map.getCharAtLoc(location);
+        }
+        map.revealed(location);
+        location.y--;
+        return map.getCharAtLoc(location);
+    }
 }

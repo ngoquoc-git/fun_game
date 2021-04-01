@@ -78,4 +78,61 @@ public class Hero extends Entity implements Magical{
         map = m;
         location = map.findStart();
     }
+
+    /**
+     * Show hero's name and HP
+     */
+    public String toString(){
+        return getName() + ": " + getHP() + "/" + getMaxHP();
+    }
+
+    /**
+     * Items that hero is holding
+     * @return List of items
+     */
+    public String itemsToString(){
+        String itemList = "";
+        for(int i =0; i < items.size(); i++){
+            itemList = itemList + String.valueOf(i+1) + ". " +  items.get(i) + ".\n";
+        }
+        return itemList;
+    }
+
+    /**
+     * Get total number of item the hero is holding
+     * @return number of item
+     */
+    public int getNumItems(){return items.size();}
+
+    /**
+     * Drop an unwanted item
+     * @param index location of the item in the bag
+     */
+    public void dropItem(int index) {items.remove(index);}
+
+    /**
+     * Pick up an item after encountering it
+     * @param i the item to be picked
+     * @return true if it is picked, false if it is not
+     */
+    public boolean pickUpItem(Item i){
+        int decision;
+        System.out.println("You receive " + i.getName());
+        if(items.size() < 6){
+            items.add(i);
+            return true;
+        }
+        else{
+            System.out.println("Your bag is full. Choose an item to remove (Choose 6 to keep previous items.\n");
+            System.out.println(itemsToString());
+            decision = CheckInput.getIntRange(1, 6);
+
+            if(decision == 6) return false;
+            else {
+                dropItem(decision - 1);
+                items.add(i);
+                return true;
+            }
+        }
+    }
 }

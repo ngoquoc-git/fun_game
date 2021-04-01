@@ -24,7 +24,7 @@ public abstract class Entity {
      * @param e Entity that is attacked
      * @return attack action
      */
-    abstract String attack(Entity e);
+    public abstract String attack(Entity e);
 
     /**
      * Get entity's name

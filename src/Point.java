@@ -1,7 +1,7 @@
 public class Point {
     //Location x,y of an object in a 2D array
-    private int x;
-    private int y;
+    public int x;
+    public int y;
 
     /**
      * Location point x, y
